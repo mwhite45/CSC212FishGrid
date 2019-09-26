@@ -235,9 +235,14 @@ public class World {
 	public static void objectsFollow(WorldObject target, List<? extends WorldObject> followers) {
 		// TODO(FishGrid) Comment this method!
 		// What is recentPositions?
+		// recentPositions is a linked list of the position history of the fish (world objects). 
 		// What is followers?
+		// followers is a list of fish (world objects) that will follow the leader fish).
 		// What is target?
+		// target is the leader fish.
 		// Why is past = putWhere[i+1]? Why not putWhere[i]?
+		/* It has to be putWhere[i+1] because putWhere comes after iterating through the list of followers.
+		It can never be less than... */ 
 		List<IntPoint> putWhere = new ArrayList<>(target.recentPositions);
 		for (int i=0; i < followers.size() && i+1 < putWhere.size(); i++) {
 			// What is the deal with the two conditions in this for-loop?

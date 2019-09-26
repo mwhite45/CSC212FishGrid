@@ -1,5 +1,6 @@
 package edu.smith.cs.csc212.fishgrid;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -46,6 +47,8 @@ public class FishGame {
 	//initialize snail
 	Snail snail;
 	
+	boolean fastScared;
+	
 	/**
 	 * Create a FishGame of a particular size.
 	 * @param w how wide is the grid?
@@ -68,6 +71,8 @@ public class FishGame {
 		
 		// TODO(lab) Make the snail!
 		snail = world.insertSnailRandomly();
+		
+		//fastScared = false;
 		
 		
 		// Make the player out of the 0th fish color.
@@ -129,7 +134,18 @@ public class FishGame {
 				
 				
 				// Increase score when you find a fish!
-				score += 10;
+				
+				if (f.getColor().equals(Color.red)) {
+					score += 10;
+				} else if (f.getColor().equals(Color.green)) {
+					score += 12;
+				} else if (f.getColor().equals(Color.yellow)) {
+					score += 14;
+				} else if (f.getColor().equals(Color.orange)) {
+					score += 16;
+				} else if (f.getColor().equals(Color.blue)) {
+					score += 18;
+				}
 			}
 		}
 		
@@ -148,11 +164,14 @@ public class FishGame {
 		Random rand = ThreadLocalRandom.current();
 		for (P2Fish lost : missing) {
 			// 30% of the time, lost fish move randomly.
-			if (rand.nextDouble() < 0.3) {
+			if (lost.fastScared == true) {
+				if (rand.nextDouble() < 0.3) {
 				// TODO(lab): What goes here?
-				//P2Fish.moveUp();
-				
-				
+				lost.moveRandomly();
+				} else if (rand.nextDouble() < 0.8) {
+				//move more often randomly
+				lost.moveRandomly();
+				}
 			}
 		}
 	}
@@ -167,6 +186,12 @@ public class FishGame {
 		System.out.println("Clicked on: "+x+","+y+ " world.canSwim(player,...)="+world.canSwim(player, x, y));
 		List<WorldObject> atPoint = world.find(x, y);
 		// TODO(FishGrid) allow the user to click and remove rocks.
+		for (WorldObject it : atPoint ) {
+			if (it instanceof Rock ) {
+				world.remove(it);
+			}
+			
+		}
 
 	}
 	

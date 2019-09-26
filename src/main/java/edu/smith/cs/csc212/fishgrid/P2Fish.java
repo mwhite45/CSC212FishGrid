@@ -34,6 +34,8 @@ public class P2Fish extends WorldObject {
 	 */
 	boolean player = false;
 	
+	boolean fastScared;
+	
 	/**
 	 * Called only on the Fish that is the player!
 	 */
@@ -50,6 +52,7 @@ public class P2Fish extends WorldObject {
 	public P2Fish(int color, World world) {
 		super(world);
 		this.color = color;
+		this.fastScared = false;
 	}
 	
 	/**
