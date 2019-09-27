@@ -52,7 +52,7 @@ public class P2Fish extends WorldObject {
 	public P2Fish(int color, World world) {
 		super(world);
 		this.color = color;
-		this.fastScared = false;
+		this.fastScared = true;
 	}
 	
 	/**
